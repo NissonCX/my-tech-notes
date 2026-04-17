@@ -40,5 +40,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 提交规范
 
 使用 Conventional Commits 格式，描述用中文：
-- `feat(分类): 添加新笔记`
+- `docs(Git): 添加 Git 数据模型笔记`
 - `docs: 更新 README`
+
+**注意**：commit message 不要包含 Co-Authored-By Claude 相关信息。
