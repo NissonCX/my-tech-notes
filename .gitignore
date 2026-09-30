@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Obsidian —— 忽略每台机器各自的工作区状态与缓存，保留配置
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+.obsidian/.trash/
