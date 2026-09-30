@@ -25,7 +25,11 @@
 
 ### AI / 大模型
 
-- [[大模型推理与KV-Cache基础]] — Transformer 推理链路、KV Cache 原理、Prefix Cache 与命中率、显存与批处理
+- [[大模型推理基础]] — 分词、嵌入、位置编码、注意力、因果掩码、为什么 32 层
+- [[KV-Cache原理]] — 为什么可缓存、垂直传 h 水平沉 K/V、prefill·decode、显存公式
+- [[Prefix-Cache与命中率]] — DSH 命中率口径、真实数据、追加便宜修改昂贵
+- [[推理性能与显存]] — compute/memory-bound、批处理、服务端架构、HBM/SM
+- [[术语总表]] — 中英对照 + 组句示例
 
 ### 后端与语言
 
@@ -52,11 +56,19 @@
 - [[网络代理基础知识]]
 - [[正则表达式基础]]
 
+## 待学
+
+- **MLA 专题** — 低秩压缩 / 潜向量，DeepSeek 如何把 KV 再压一个数量级
+- **推理引擎视角** — PagedAttention 的实现、continuous batching 的调度、TTFT/TPOT 调优
+- **KV Cache 的工程管理** — 显存池、块表、驱逐策略
+
 ## 常用标签
 
 写新笔记时优先复用，别造新词：
 
-`大模型` `KV-Cache` `Transformer` `推理优化` `MaaS` `AI-Agent`
+`大模型` `Transformer` `推理基础` `注意力机制` `位置编码`
+`KV-Cache` `Prefix-Cache` `缓存命中` `推理优化` `显存` `批处理` `GQA` `MLA`
+`MaaS` `AI-Infra` `AI-Agent` `术语表` `DSH`
 `Go` `Java` `并发` `设计模式` `HTTP框架` `微服务`
 `数据库` `Git` `网络` `正则表达式` `开发规范` `工具评估`
 
