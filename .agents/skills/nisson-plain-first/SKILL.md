@@ -1,6 +1,6 @@
 ---
-name: plain-first
-description: Explain an unfamiliar technical concept, concrete-first. Use when the user is learning a topic, asks what something really is, or restates an idea and wants a verdict.
+name: nisson-plain-first
+description: Explain an unfamiliar technical concept, plain language before jargon. Use when the user is learning a topic, asks what something really is, or restates an idea and wants a verdict.
 ---
 
 # plain-first
