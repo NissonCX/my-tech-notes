@@ -1,7 +1,9 @@
-# LazyVim 基础操作入门
+---
+date: 2026-04-19
+tags: [LazyVim, Neovim, 编辑器, 开发工具]
+---
 
-日期：2026-04-19
-标签：LazyVim, Neovim, 编辑器, 开发工具
+# LazyVim 基础操作入门
 
 ## 问题
 

@@ -6,3 +6,7 @@
 .obsidian/workspace-mobile.json
 .obsidian/cache/
 .obsidian/.trash/
+
+# 本地代理配置（含 server / password）与日志，不要提交
+clash_config.yaml
+nvim.log

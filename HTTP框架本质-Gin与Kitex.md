@@ -1,7 +1,9 @@
-# HTTP 框架的本质：`net/http`、Gin、Hertz 与 Kitex 的分工
+---
+date: 2026-04-21
+tags: [Go, HTTP框架, Gin, Hertz, Kitex, 架构设计]
+---
 
-日期：2026-04-21
-标签：Go, HTTP框架, Gin, Hertz, Kitex, 架构设计
+# HTTP 框架的本质：`net/http`、Gin、Hertz 与 Kitex 的分工
 
 ## 问题
 

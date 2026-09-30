@@ -1,7 +1,9 @@
-# 大模型推理与 KV Cache 基础
+---
+date: 2026-10-01
+tags: [大模型, KV-Cache, Transformer, Prefix-Cache, 推理优化, MaaS]
+---
 
-日期：2026-10-01
-标签：大模型, KV Cache, Transformer, Prefix Cache, 推理优化, MaaS
+# 大模型推理与 KV Cache 基础
 
 ## 问题
 

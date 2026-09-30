@@ -13,11 +13,16 @@ This file provides guidance to Codex (Codex.ai/code) when working with code in t
 - 在"相关问题"部分追加拓展提问
 
 ### 文档格式
-```markdown
-# 标题
 
-日期：YYYY-MM-DD
-标签：标签1, 标签2
+元信息写在 frontmatter 里（Obsidian 属性能识别；正文里的"标签：xxx"识别不了）：
+
+```markdown
+---
+date: YYYY-MM-DD
+tags: [标签1, 标签2]
+---
+
+# 标题
 
 ## 问题
 原问题内容
@@ -32,9 +37,22 @@ This file provides guidance to Codex (Codex.ai/code) when working with code in t
 延伸知识点（可选）
 ```
 
+**标签规则**：Obsidian 的 tag 不能含空格，多个词的标签用连字符（`KV-Cache`、`AI-Infra`）。
+
+### 长对话学习笔记（AI 整理）
+
+从长对话整理出的学习笔记（区别于逐条问答的老笔记），额外遵守：
+
+- **一篇一主题**，目标 150–250 行；超过约 300 行必须按主题拆分，用 `[[双链]]` 互连。
+- **不要把对话过程搬进来**。只留结论、对比表、图示、术语和纠错点。
+- **必须有一节「常见误解」**：记录学习过程中真实踩过的坑。这是复习时最值钱的部分。
+- 新建前先看根目录 `README.md` 索引：有可挂靠的笔记就追加，没有才新建。
+- 文件名不要含空格（脚本和命令行会踩坑）。
+
 ### 分类管理
-- 按技术领域分类（Java、AI、Others 等）
-- 分类文件夹按需创建
+- **所有笔记平铺在仓库根目录**，不建技术分类文件夹（理由见 README）
+- 分类用 frontmatter 的 `tags`，导航用根目录 `README.md` 索引
+- 新笔记三步：平铺 → 打标签 → 在 README 索引加一行链接
 - 图片跟随笔记文件同目录
 
 ## 提交规范
