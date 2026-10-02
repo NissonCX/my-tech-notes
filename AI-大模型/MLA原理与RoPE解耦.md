@@ -161,4 +161,4 @@ score = Q_content · K_content + Q_rope · K_rope
 
 - 上游：注意力三步、多头、RoPE 基础 → [[大模型推理基础]]
 - KV Cache 与 GQA / MQA → [[KV-Cache原理]]
-- 复习入口与知识结构图 → [[AI-Infra知识地图]]
+- 复习入口与知识结构图 → [[AI-Infra复习清单]]
