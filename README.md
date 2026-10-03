@@ -79,6 +79,7 @@ my-tech-notes/
 - [[推理性能与显存]] — compute/memory-bound、批处理、服务端架构、HBM/SM
 - [[MLA原理与RoPE解耦]] — 低秩压缩、weight absorption、RoPE 冲突与 decoupled RoPE
 - [[数值精度与量化]] — 浮点数结构（手算 0.75）、0.1 为什么存不准、fp16/bf16/int8 的取舍
+- [[API网关鉴权与传输安全]] — API Key/JWT/HMAC、速率限制 vs 配额、TLS 混合加密与前向保密
 - [[术语总表]] — 中英对照 + 面试组句示例
 - [[2026年10月-M4-16GB-Ollama小模型选型]] — Qwen3.5 9B / Gemma4 12B / Ministral 3 8B 选型、TTFT·TPOT 观测手段
 - [[2026年10月-Ollama图形界面方案]] — 官方 Ollama.app 无对话窗、桌面客户端 / Web UI / 浏览器扩展对比、16GB 内存账
