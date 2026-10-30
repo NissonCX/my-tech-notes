@@ -1,0 +1,27 @@
+{
+	"nodes":[
+		{"id":"center","type":"text","text":"# Backend Engineering\n**业务复杂度驱动架构演进**\n\n不是组件数量驱动","x":-220,"y":-420,"width":440,"height":140,"color":"4"},
+		{"id":"product","type":"text","text":"## 产品\n**FixFlow 多公司设备维修平台**\n\n首版只启用一个种子租户\n\n租户边界从第一天存在\n\n流程：创建 → 分派 → 处理 → 解决 → 关闭","x":-720,"y":-180,"width":420,"height":280,"color":"1"},
+		{"id":"v1","type":"text","text":"## v1 · 业务与数据库\n\n状态机\n乐观锁\n事务与审计\n租户隔离\nCI/CD 与基础观测\n\n**不引入 Kafka、ES、Redis**","x":-720,"y":170,"width":420,"height":280,"color":"2"},
+		{"id":"v2","type":"text","text":"## v2 · 异步一致性\n\n业务事务写 Outbox\nKafka 按 tenant:ticket 分区\n消费者 Inbox 去重\n重试与 DLT\n\n**前提：多个独立异步副作用**","x":-220,"y":-180,"width":420,"height":280,"color":"3"},
+		{"id":"v3","type":"text","text":"## v3 · 搜索\n\nES 召回并排序 ID\nMySQL 读取当前事实\n恢复 ES 顺序\n校验租户与权限\n\n**前提：MySQL 搜索不满足 SLO**","x":280,"y":-180,"width":420,"height":280,"color":"5"},
+		{"id":"later","type":"text","text":"## 后续能力\n\n备件库存：真实共享库存\n在线支付：外部客户付款\n完整多租户运营：第二个真实租户\n\n每项都先有业务触发条件","x":280,"y":170,"width":420,"height":280,"color":"6"},
+		{"id":"rule","type":"text","text":"### 原则\n\n不可逆决定早做\n可替换基础设施晚做\n\n每个技术都必须回答：\n**哪个业务事实迫使它存在？**","x":800,"y":-180,"width":420,"height":240,"color":"4"},
+		{"id":"route","type":"file","file":"_学习档案/Backend-Engineering/学习路线.md","x":-720,"y":510,"width":420,"height":220,"color":"1"},
+		{"id":"review","type":"file","file":"_学习档案/Backend-Engineering/复习清单.md","x":-220,"y":510,"width":420,"height":220,"color":"3"},
+		{"id":"log","type":"file","file":"_学习档案/学习日志.md","x":280,"y":510,"width":420,"height":220,"color":"5"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"center","fromSide":"bottom","toNode":"product","toSide":"top"},
+		{"id":"e2","fromNode":"center","fromSide":"bottom","toNode":"v2","toSide":"top"},
+		{"id":"e3","fromNode":"center","fromSide":"bottom","toNode":"v3","toSide":"top"},
+		{"id":"e4","fromNode":"product","fromSide":"bottom","toNode":"v1","toSide":"top"},
+		{"id":"e5","fromNode":"v1","fromSide":"right","toNode":"v2","toSide":"left"},
+		{"id":"e6","fromNode":"v2","fromSide":"right","toNode":"v3","toSide":"left"},
+		{"id":"e7","fromNode":"v3","fromSide":"bottom","toNode":"later","toSide":"top"},
+		{"id":"e8","fromNode":"v2","fromSide":"right","toNode":"rule","toSide":"left"},
+		{"id":"e9","fromNode":"product","fromSide":"bottom","toNode":"route","toSide":"top"},
+		{"id":"e10","fromNode":"route","fromSide":"right","toNode":"review","toSide":"left"},
+		{"id":"e11","fromNode":"review","fromSide":"right","toNode":"log","toSide":"left"}
+	]
+}
