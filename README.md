@@ -28,7 +28,7 @@
 
 ```text
 my-tech-notes/
-├── AI-大模型/        大模型推理、KV Cache、注意力机制、MLA
+├── AI-大模型/        大模型推理、KV Cache、注意力机制、MLA、MoE、DSA
 ├── 后端与语言/        Go / Java / 微服务 / 设计模式
 ├── 数据库/
 ├── 工程与工具/        Git、编辑器、CI、代码规范
@@ -78,6 +78,9 @@ my-tech-notes/
 - [[Prefix-Cache与命中率]] — DSH 命中率口径、真实数据、追加便宜修改昂贵
 - [[推理性能与显存]] — compute/memory-bound、批处理、服务端架构、HBM/SM
 - [[MLA原理与RoPE解耦]] — 低秩压缩、weight absorption、RoPE 冲突与 decoupled RoPE
+- [[MoE与DeepSeek成本结构]] — Dense vs MoE、Router + top-k 专家、671B/37B、省计算不省显存
+- [[DSA稀疏注意力]] — indexer + top-k、主注意力 O(L·k)、MLA vs DSA、与滑动窗口/FlashAttention 的区别
+- [[大模型训练与对齐]] — 预训练、SFT、RLHF/DPO/RLVR、LoRA 与本地微调路线
 - [[数值精度与量化]] — 浮点数结构（手算 0.75）、0.1 为什么存不准、fp16/bf16/int8 的取舍
 - [[API网关鉴权与传输安全]] — API Key/JWT/HMAC、速率限制 vs 配额、TLS 混合加密与前向保密
 - [[术语总表]] — 中英对照 + 面试组句示例
@@ -122,40 +125,60 @@ my-tech-notes/
 ```text
 _学习档案/
 ├── 学习日志.md          ★ 全局唯一一份，各方向分节
-└── AI-Infra/
+├── LLM-Foundations/
+│   ├── 学习路线.md
+│   ├── 复习清单.md
+│   ├── 知识地图.canvas
+│   └── 本地大模型推理主机选型.md
+└── Backend-Engineering/
     ├── 学习路线.md
     ├── 复习清单.md
     ├── 知识地图.canvas
-    └── 本地大模型推理主机选型.md
+    └── 多租户身份模型调研.md
 ```
 
 | 文件 | 用途 |
 |---|---|
 | [[知识地图.canvas]] | 🗺️ **思维导图**：一屏看全局，节点带关键结论（建议设为 Obsidian 启动页） |
-| [[复习清单]] | 掌握清单（概念 14 条 + 计算 4 条）+ 关键等式速查 + 三档复盘路径 |
+| [[复习清单]] | 掌握清单（概念 24 条 + 计算 9 条 + 系统 6 条 + 精度 2 条）+ 关键等式速查 + 三档复盘路径 |
 | [[学习日志]] | **我犯过的错**——只属于个人的薄弱点，复习优先级最高 |
-| [[学习路线]] | 12 周排期、三层知识、教材、实验、验收方式 |
+| [[学习路线]] | LLM Foundations 学习契约：共同主干、深度边界、碎片化单元与完成证据 |
 | [[本地大模型推理主机选型]] | 硬件调研（2026-10 价格，**未逐页核实，下单前复核**） |
+| [[_学习档案/Backend-Engineering/学习路线|Backend Engineering 学习路线]] | 多租户业务边界、阶段演进、技术触发条件与完成证据 |
+| [[_学习档案/Backend-Engineering/复习清单|Backend Engineering 复习清单]] | 当前待掌握的概念、设计能力与复盘路径 |
+| [[_学习档案/Backend-Engineering/知识地图.canvas|Backend Engineering 知识地图]] | v1 至后续能力的演进关系 |
+| [[_学习档案/Backend-Engineering/多租户身份模型调研|多租户身份模型调研]] | 全局身份、租户成员关系、多角色、邀请与离职生命周期 |
 
 > **学习流程与记录规范**固化在全局 skill **`study`** 里（讲授规范、复述闸门、四类文件格式、从零重建步骤）——**仓库丢了也能照它重建**。
 
+### Backend Engineering
+
+- 产品定位：多公司设备维修平台，首版只启用一个种子租户。
+- 工程基线：遵循《阿里巴巴 Java 开发手册（黄山版）》；【强制】作为硬门槛，【推荐】默认采用并记录偏离。
+- ID 方向：数据库关系使用 `BIGINT UNSIGNED`，公开 UUID 使用 `CHAR(36)`。
+- 首版范围：登录授权、工单主流程、状态机、并发控制、审计、MySQL、CI/CD。
+- 明确不做：RabbitMQ、首发 Kafka/ES、库存和在线支付。
+- v2 触发器：出现可靠异步副作用后，使用 MySQL Outbox + Kafka。
+
+完整阶段和技术触发条件见 [[_学习档案/Backend-Engineering/学习路线|Backend Engineering 学习路线]]。
+
 ## 学习路线
 
-**目标**：成为懂推理的 API 工程师——能读懂下游推理服务、设计对的 MaaS API；并建立 AI 推理的底层认知。
+**目标**：建立可迁移的 LLM 系统基础认知，能够解释、估算、集成、诊断与评估。
 完整计划见 [[学习路线]]。当前进度：
 
-- 🔄 **第 1–2 周 推理层收口** — 头的切分机制、MLA ✅ 知识部分完成，实验待做
-- ⬜ **第 3–5 周 平台层** — 三协议适配、计费、限流、流式、模型路由 + mini Go 网关
-- ⬜ **第 6–7 周 模型结构** — MoE、量化
-- ⬜ **第 8–10 周 引擎层** — PagedAttention、continuous batching、FlashAttention、PD 分离
-- ⬜ **第 11–12 周 容量与成本** — 并发、调度、部署形态、成本模型
+- 🔄 **模型基础** — Transformer、采样、SFT、LoRA 与 Alignment 概览已有基础；RLHF / DPO / RLVR 待复述
+- 🔄 **推理与 Serving** — KV、MLA、DSA、量化和延迟实验已有主体；综合容量账本、批处理、并行与引擎层待补
+- ⬜ **应用与 Agent** — 上下文管理、工具调用、RAG、Agent 循环与评测待学
+- 🔄 **系统、评估与成本** — 鉴权、限流、TLS 和模型成本调研已有基础；路由、SSE、计费与观测待补
+- ⬜ **L3 方向项目** — 后半程从推理引擎、Agent Runtime、LLM 网关中三选一
 
 ## 常用标签
 
 写新笔记时优先复用，别造新词：
 
-`大模型` `Transformer` `推理基础` `注意力机制` `位置编码` `RoPE` `MLA`
-`KV-Cache` `Prefix-Cache` `缓存命中` `推理优化` `显存` `批处理` `GQA` `MaaS` `AI-Infra`
+`大模型` `Transformer` `推理基础` `注意力机制` `位置编码` `RoPE` `MLA` `MoE` `DSA` `稀疏注意力`
+`KV-Cache` `Prefix-Cache` `缓存命中` `推理优化` `显存` `批处理` `GQA` `MaaS` `AI-Infra` `LLM-Foundations`
 `Go` `Java` `并发` `设计模式` `HTTP框架` `微服务`
 `数据库` `Git` `网络` `正则表达式` `开发规范` `工具评估`
 `学习日志` `MOC` `复习` `方法论`

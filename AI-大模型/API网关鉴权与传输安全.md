@@ -234,6 +234,6 @@ signature    = HMAC-SHA256(secret, method + path + timestamp + nonce + payload_h
 
 ## 延伸阅读
 
-- 一次 API 调用的完整链路与其余环节 → [[AI-Infra学习路线]]
-- 推理引擎（下游）→ 阶段 4 内容
+- 一次 API 调用的完整链路与其余环节 → [[学习路线]]
+- 推理引擎（下游）→ LLM Foundations 的“推理与 Serving”模块
 - 模型服务层的性能指标 TTFT / TPOT → [[推理性能与显存]]
